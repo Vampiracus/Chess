@@ -67,7 +67,8 @@ vector<int> bestMove(const vector<vector<int>> & theMatrix, bool whites_turn)
 	}
 
 
-	return moves[iMaxes[0]];
+//	Раскоментировать -- будет возвращать лучший ход
+//	return moves[iMaxes[0]];
 
 
 	if (maxes[1] == -1000)
