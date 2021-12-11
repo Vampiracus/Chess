@@ -10,6 +10,11 @@
 	   6 - пешка белых,  -6 - пешка чЄрных
 			*/
 
+			//ѕоследний р€д отвечает за спец.услови€. [8][0], [8][1] -- за право на соответственно короткую и длинную рокировку дл€ белых
+			//[8][2], [8][3] -- за право на соответственно короткую и длинную рокировку дл€ чЄрных
+			//“акже опционально могут быть [8][4] и [8][5] -- координаты пол€ дл€ вз€ти€ на проходе
+
+
 //Returns if the figure is attacked by less or the same number of figures than it is defended by
 bool defended(const vector<vector<int>>& theMatrix, int i, int j)
 {
@@ -725,10 +730,10 @@ double KingDefenceAdv(const vector <vector <int> >& a) {
 	long double sum = 0;
 	for (i = 0; i < 8; i++) {
 		for (g = 0; g < 8; g++) {
-			if (((abs(a[i][g]) == 2) || (abs(a[i][g]) == 3)) && (numofattonespot[i][g] != 0) && (numofattonespot[i][g] / (abs(numofattonespot[i][g])) != a[i][g] / (abs(a[i][g])))) { sum = sum + 0.5 * (numofattonespot[i][g] / abs(numofattonespot[i][g])) * 3; }
-			else if ((abs(a[i][g]) == 4) && (numofattonespot[i][g] != 0) && (numofattonespot[i][g] / (abs(numofattonespot[i][g])) != a[i][g] / (abs(a[i][g])))) { sum = sum + 0.7 * (numofattonespot[i][g] / abs(numofattonespot[i][g])) * 9; }
-			else if ((abs(a[i][g]) == 1) && (numofattonespot[i][g] != 0) && (numofattonespot[i][g] / (abs(numofattonespot[i][g])) != a[i][g] / (abs(a[i][g])))) { sum = sum + 0.6 * (numofattonespot[i][g] / abs(numofattonespot[i][g])) * 5; }
-			else if ((abs(a[i][g]) == 6) && (numofattonespot[i][g] != 0) && (numofattonespot[i][g] / (abs(numofattonespot[i][g])) != a[i][g] / (abs(a[i][g])))) { sum = sum + 0.3 * (numofattonespot[i][g] / abs(numofattonespot[i][g])) * 1; }
+			if ((abs(a[i][g]) == 2) || (abs(a[i][g]) == 3)) { sum = sum + 0.03 * numofattonespot[i][g]; }
+			else if (abs(a[i][g]) == 4) { sum = sum + 0.09 * numofattonespot[i][g]; }
+			else if (abs(a[i][g]) == 1) { sum = sum + 0.05 * numofattonespot[i][g]; }
+			else if (abs(a[i][g]) == 6) { sum = sum + 0.03 * numofattonespot[i][g]; }
 		}
 	}
 	//for white
@@ -739,9 +744,9 @@ double KingDefenceAdv(const vector <vector <int> >& a) {
 		if ((xw - 1 < 8) && (yw + 1 < 8) && (xw - 1 > -1) && (yw + 1 > -1)) { sum = sum + 0.1 * numofattonespot[xw - 1][yw + 1]; }
 		if ((xw - 1 < 8) && (yw < 8) && (xw - 1 > -1) && (yw > -1)) { sum = sum + 0.1 * numofattonespot[xw - 1][yw]; }
 		if ((xw - 1 < 8) && (yw - 1 < 8) && (xw - 1 > -1) && (yw - 1 > -1)) { sum = sum + 0.1 * numofattonespot[xw - 1][yw - 1]; }
-		if ((xw < 8) && (yw + 1 < 8) && (xw > -1) && (yw + 1 > -1)) { sum = sum + 0.10 * numofattonespot[xw][yw + 1]; }
+		if ((xw < 8) && (yw + 1 < 8) && (xw > -1) && (yw + 1 > -1)) { sum = sum + 0.1 * numofattonespot[xw][yw + 1]; }
 		if ((xw < 8) && (yw - 1 < 8) && (xw > -1) && (yw - 1 > -1)) { sum = sum + 0.1 * numofattonespot[xw][yw - 1]; }
-		sum = sum + 0.15 * numofattonespot[xw][yw];
+		sum = sum + 0.12 * numofattonespot[xw][yw];
 
 	}
 	//for black
@@ -770,7 +775,7 @@ double KingDefenceAdv(const vector <vector <int> >& a) {
 		if ((xb < 8) && (yb - 1 < 8) && (xb > -1) && (yb - 1 > -1)) {
 			sum = sum + 0.1 * numofattonespot[xb][yb - 1];
 		}
-		sum = sum + 0.15 * numofattonespot[xb][yb];
+		sum = sum + 0.12 * numofattonespot[xb][yb];
 	}
 	return sum;
 }

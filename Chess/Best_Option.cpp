@@ -17,7 +17,7 @@ double ifMoveLikeThis(vector<vector<int>> theMatrix, bool whites_turn, int depth
 	for (int i = 1; i < moves.size(); i++)
 	{
 		double cur = ifMoveLikeThis(make_move(theMatrix, moves[1][0], moves[1][1], moves[1][2], moves[1][3]), !whites_turn, depthToThink - 1);
-		if ((ma - cur) * color > 0)
+		if ((cur - ma) * color > 0)
 		{
 			ma = cur;
 			moves.erase(moves.begin());

@@ -1998,12 +1998,12 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 					   if (positions[1][1] == positions[0][1] + 2)
 					   {
 						   theMatrix[7][7] = 0;
-						   theMatrix[7][4] = 1;
+						   theMatrix[7][4] = -1;
 					   }
 					   if (positions[1][1] == positions[0][1] - 2)
 					   {
 						   theMatrix[7][0] = 0;
-						   theMatrix[7][2] = 1;
+						   theMatrix[7][2] = -1;
 					   }
 				   }
 				   //Взятие на проходе
